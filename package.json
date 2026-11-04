@@ -1,0 +1,70 @@
+{
+  "name": "focusdock",
+  "productName": "FocusDock",
+  "version": "1.0.0",
+  "description": "A to-do panel that docks to the edge of your leftmost screen, with deadline reminders and a rewarding finish.",
+  "main": "main.js",
+  "author": "Emir Balkan",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test test/core.test.js",
+    "dist": "electron-builder --win nsis --x64 --publish never"
+  },
+  "dependencies": {
+    "koffi": "~2.16.3"
+  },
+  "devDependencies": {
+    "electron": "~45.2.1",
+    "electron-builder": "~26.18.0"
+  },
+  "build": {
+    "appId": "com.emirbalkan.focusdock",
+    "productName": "FocusDock",
+    "copyright": "Emir Balkan",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "renderer/**/*",
+      "assets/**/*",
+      "package.json",
+      "!node_modules/koffi/src/**",
+      "!node_modules/koffi/vendor/**",
+      "!node_modules/koffi/doc/**",
+      "!node_modules/koffi/build/koffi/!(win32_x64)/**"
+    ],
+    "asarUnpack": [
+      "node_modules/koffi/**"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico",
+      "signExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": false,
+      "createStartMenuShortcut": true,
+      "shortcutName": "FocusDock",
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": false,
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico"
+    },
+    "publish": null
+  }
+}
